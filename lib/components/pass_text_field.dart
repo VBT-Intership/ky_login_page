@@ -6,6 +6,7 @@ class PasswordTextField extends StatelessWidget {
   
   TextFormField buildPassFormField() {
     return TextFormField(
+        obscureText: true,
         decoration: buildInputDecoration("password"),
         validator: (val)  { return val.length > 0 ? null: "Enter your password.";},
       );

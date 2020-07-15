@@ -3,16 +3,21 @@ import 'package:ky_login_page/components/email_text_field.dart';
 import 'package:ky_login_page/components/pass_text_field.dart';
 import 'package:ky_login_page/components/forgot_field.dart';
 import 'package:ky_login_page/view/login_view.dart';
-class View extends StatefulWidget {
-  View({Key key}) : super(key: key);
+import 'package:ky_login_page/models/user.dart';
+
+class HomeView extends StatefulWidget {
+  HomeView({Key key}) : super(key: key);
 
   @override
   _ViewState createState() => _ViewState();
 }
 
-class _ViewState extends State<View> {
+class _ViewState extends State<HomeView> {
+  final textController = TextEditingController();
+  final User user = new User();
   GlobalKey<FormState> _state = GlobalKey();
   bool isAutoValidated = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,7 @@ class _ViewState extends State<View> {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OpenSans',
-                  fontSize: 30.0,
+                  fontSize: 40.0,
                   fontWeight: FontWeight.bold
                    ),
                 );
@@ -56,9 +61,8 @@ class _ViewState extends State<View> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color.fromRGBO(232, 171, 2, 1),
-            Color.fromRGBO(240, 200, 89, 1),
-            Color.fromRGBO(184, 145, 37, 1),
+            Colors.blue,
+            Colors.teal
           ])
         ),
       );
@@ -72,8 +76,6 @@ class _ViewState extends State<View> {
         EmailTextField(),
         PasswordTextField(),
         ForgotPasswordField(),
-        //buildEmailTextField(),
-        //buildPassFormField(),
         buildLoginButton()
       ],
       ),
@@ -85,10 +87,17 @@ class _ViewState extends State<View> {
         onPressed: () => {
         if(!_state.currentState.validate()) {
           setState(() => {this.isAutoValidated = true}),
+        },
+        if(_state.currentState.validate()) {
+          this.user.email = "email",
+          this.user.password = "pass",
           Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginView()),
-        }      
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginView(user: this.user)
+            )
+          )
+        }
       },
       color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
