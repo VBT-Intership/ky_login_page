@@ -73,7 +73,7 @@ class _ViewState extends State<HomeView> {
       autovalidate: isAutoValidated,
       key: _state,
       child: Column(children: <Widget>[
-        EmailTextField(),
+        EmailasdsaTextField(),
         PasswordTextField(),
         ForgotPasswordField(),
         buildLoginButton()
