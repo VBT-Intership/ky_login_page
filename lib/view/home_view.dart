@@ -73,7 +73,7 @@ class _ViewState extends State<HomeView> {
       autovalidate: isAutoValidated,
       key: _state,
       child: Column(children: <Widget>[
-        EmailasdsaTextField(),
+        EmailTextField(),
         PasswordTextField(),
         ForgotPasswordField(),
         buildLoginButton()
@@ -89,6 +89,7 @@ class _ViewState extends State<HomeView> {
           setState(() => {this.isAutoValidated = true}),
         },
         if(_state.currentState.validate()) {
+          //TODO: can't access other components' textController.
           this.user.email = "email",
           this.user.password = "pass",
           Navigator.push(
